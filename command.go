@@ -1,0 +1,63 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"os"
+)
+
+type cliCommand struct {
+	name        string
+	description string
+	callback    func(cfg *config) error
+}
+
+func commandExit(cfg *config) error {
+	fmt.Println("Closing the Pokedex... Goodbye!")
+	os.Exit(0)
+	return nil
+}
+
+func commandHelp(cfg *config) error {
+	fmt.Println("Welcome to the Pokedex!")
+	fmt.Println("Usage:\n")
+	for _, command := range getCommands() {
+		fmt.Printf("%s: %s\n", command.name, command.description)
+	}
+	return nil
+}
+
+func commandMap(cfg *config) error {
+	locationsResp, err := cfg.pokeapiClient.ListLocations(cfg.nextLocationsURL)
+	if err != nil {
+		return err
+	}
+
+	cfg.nextLocationsURL = locationsResp.Next
+	cfg.prevLocationsURL = locationsResp.Prev
+
+	for _, loc := range locationsResp.Results {
+		fmt.Println(loc.Name)
+	}
+
+	return nil
+}
+
+func commandMapBack(cfg *config) error {
+	if cfg.prevLocationsURL == nil {
+		return errors.New("you're on the first page")
+	}
+	locationsResp, err := cfg.pokeapiClient.ListLocations(cfg.prevLocationsURL)
+	if err != nil {
+		return err
+	}
+
+	cfg.nextLocationsURL = locationsResp.Next
+	cfg.prevLocationsURL = locationsResp.Prev
+
+	for _, loc := range locationsResp.Results {
+		fmt.Println(loc.Name)
+	}
+
+	return nil
+}
