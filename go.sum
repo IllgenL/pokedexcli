@@ -1,2 +1,2 @@
-github.com/illgenl/pokedexcli/internal/pokeapi v0.0.0-20260708124629-af27248e1e61 h1:oO/3aq5yaieJQOXz3v1tvdzU58pEs/5C1e1vSrZn5xY=
-github.com/illgenl/pokedexcli/internal/pokeapi v0.0.0-20260708124629-af27248e1e61/go.mod h1:z1/KIiwlrWBlLxaPq3yEWNnf+6kxnLWdAAC+vj65odU=
+github.com/illgenl/pokedexcli/internal/pokecache v0.0.0-20260709132121-bbfc6019e9ac h1:8UC9E6VHe1Y3CB7zfm0zoI2zgDIr8WXJk7+3ew+c1tg=
+github.com/illgenl/pokedexcli/internal/pokecache v0.0.0-20260709132121-bbfc6019e9ac/go.mod h1:Fl66UcEQl9oD5eA1+PMNEcRuRoH8Yqmnwj4yx0ICAes=

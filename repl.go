@@ -24,11 +24,16 @@ func startRepl(cfg *config) {
 		text := scanner.Text()
 		text = strings.TrimSpace(text)
 		words := cleanInput(text)
-		command, ok := getCommands()[words[0]]
+		commandName := words[0]
+		v := ""
+		if len(words) > 1 {
+			v = words[1]
+		}
+		command, ok := getCommands()[commandName]
 		if !ok {
 			fmt.Println("Unknown command")
 		} else {
-			err := command.callback(cfg)
+			err := command.callback(cfg, v)
 			if err != nil {
 				fmt.Println(err)
 			}
