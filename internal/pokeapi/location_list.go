@@ -8,6 +8,7 @@ import (
 
 func (c *Client) ListLocations(pageURL *string) (RespShallowLocations, error) {
 	url := baseURL + "/location-area"
+	var err error
 	if pageURL != nil {
 		url = *pageURL
 	}
@@ -16,7 +17,10 @@ func (c *Client) ListLocations(pageURL *string) (RespShallowLocations, error) {
 
 	entry, ok := c.cache.Get(url)
 	if ok {
-		json.Unmarshal(entry, &locations)
+		err = json.Unmarshal(entry, &locations)
+		if err != nil {
+			return locations, err
+		}
 		return locations, nil
 	}
 
