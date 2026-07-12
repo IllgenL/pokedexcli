@@ -38,7 +38,7 @@ type RespEncounterLocations struct {
 		} `json:"language"`
 		Name string `json:"name"`
 	} `json:"names"`
-	PokemonEncounters struct {
+	PokemonEncounters []struct {
 		Pokemon struct {
 			Name string `json:"name"`
 			URL  string `json:"url"`
